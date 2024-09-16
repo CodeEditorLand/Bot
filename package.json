@@ -1,11 +1,16 @@
 {
-	"dependencies": {
-		"@octokit/rest": "^20.0.0",
-		"yaml": "^1.10.2"
-	},
-	"devDependencies": {
-		"@types/node": "^17.0.17"
-	},
-	"main": "index.js",
-	"name": "swc-bot"
+    "name": "swc-bot",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "private": true,
+    "devDependencies": {
+        "@types/node": "^17.0.17",
+        "ts-node": "^10.5.0",
+        "typescript": "^4.5.5"
+    },
+    "dependencies": {
+        "@octokit/rest": "^20.0.0",
+        "yaml": "^1.10.2"
+    }
 }
