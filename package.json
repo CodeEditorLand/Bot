@@ -1,11 +1,11 @@
 {
+	"name": "swc-bot",
+	"main": "index.js",
 	"dependencies": {
 		"@octokit/rest": "21.0.2",
 		"yaml": "2.5.1"
 	},
 	"devDependencies": {
 		"@types/node": "22.7.3"
-	},
-	"main": "index.js",
-	"name": "swc-bot"
+	}
 }
