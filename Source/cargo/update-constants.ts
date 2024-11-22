@@ -11,6 +11,7 @@ const writeFile = promisify(fs.writeFile);
 
 (async () => {
 	const sha = await getCommitSha();
+
 	const filePath = path.resolve(
 		__dirname,
 		"../../../../crates/swc_core/src/__diagnostics.rs",

@@ -3,10 +3,12 @@ import YAML from "yaml";
 import { octokit } from "../util/octokit";
 
 const owner = "swc-project";
+
 const repo = "swc";
 
 export interface Action {
 	crate: string;
+
 	breaking: boolean;
 }
 
@@ -27,6 +29,7 @@ export async function parsePrComments(prNumber: number): Promise<Action[]> {
 		)
 		.map((c) => {
 			const idx = c.body.indexOf("swc-bump:");
+
 			if (idx === -1) {
 				return undefined;
 			}

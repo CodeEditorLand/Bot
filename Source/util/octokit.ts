@@ -9,6 +9,7 @@ export const repo = "swc";
 
 export function getCurrentPrNumber(): number {
 	const ref = process.env.GITHUB_REF;
+
 	if (!ref) {
 		throw new Error(
 			`Cannot get current pr number because GITHUB_REF is not set`,
@@ -18,6 +19,7 @@ export function getCurrentPrNumber(): number {
 
 	if (ref.startsWith(`refs/pull/`) && ref.endsWith("/merge")) {
 		const pr = ref.substring(10, ref.length - 6);
+
 		return parseInt(pr);
 	} else {
 		throw new Error(

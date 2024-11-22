@@ -19,6 +19,7 @@ function sleep(ms: number) {
 		console.log(
 			`Auto rebase script cannot work because the latest commit may require a version bump`,
 		);
+
 		return;
 	}
 
@@ -39,6 +40,7 @@ function sleep(ms: number) {
 
 	if (autoMergePrs.length === 0) {
 		console.log(`No PRs with auto-merge enabled`);
+
 		return;
 	}
 
@@ -49,8 +51,10 @@ function sleep(ms: number) {
 				repo,
 				branch: pr.base.ref,
 			});
+
 			if (baseBranch.data.commit.sha === pr.base.sha) {
 				console.error(`PR #${pr.number} is already up-to-date`);
+
 				continue;
 			}
 
