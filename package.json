@@ -4,7 +4,7 @@
 		"yaml": "2.6.1"
 	},
 	"devDependencies": {
-		"@types/node": "22.9.1"
+		"@types/node": "22.10.0"
 	},
 	"main": "index.js",
 	"name": "swc-bot"
