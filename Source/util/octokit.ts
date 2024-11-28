@@ -5,6 +5,7 @@ export const octokit = new Octokit({
 });
 
 export const owner = "swc-project";
+
 export const repo = "swc";
 
 export function getCurrentPrNumber(): number {
