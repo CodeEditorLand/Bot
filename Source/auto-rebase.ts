@@ -13,6 +13,7 @@ function sleep(ms: number) {
 	const latestCommitMessage = await getTitleOfLatestCommit();
 
 	console.log("Bot repository");
+
 	console.log(`Latest commit message: ${latestCommitMessage}`);
 
 	if (!latestCommitMessage.startsWith("chore:")) {
@@ -74,6 +75,7 @@ function sleep(ms: number) {
 				repo,
 				pull_number: pr.number,
 			});
+
 			console.log(`Created a review on PR ${pr.number}`);
 
 			await octokit.pulls.submitReview({

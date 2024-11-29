@@ -8,6 +8,7 @@ const execAsync = promisify(exec);
 
 (async () => {
 	const latestCommitMessage = await getTitleOfLatestCommit();
+
 	console.log("Latest commit message:", latestCommitMessage);
 
 	const lParenIndex = latestCommitMessage.lastIndexOf("(#");
@@ -16,6 +17,7 @@ const execAsync = promisify(exec);
 
 	if (!latestCommitMessage.endsWith(")") || lParenIndex === -1) {
 		console.log(`This commit does not seems like a PR merge`);
+
 		process.exit(1);
 
 		return;

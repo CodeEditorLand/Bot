@@ -3,6 +3,7 @@ import { parsePrComments } from "./comment-parser";
 
 (async () => {
 	const prNumber = getCurrentPrNumber();
+
 	console.log(`Checking PR #${prNumber}`);
 
 	const actions = await parsePrComments(prNumber);

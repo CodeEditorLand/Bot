@@ -33,6 +33,7 @@ export async function parsePrComments(prNumber: number): Promise<Action[]> {
 			if (idx === -1) {
 				return undefined;
 			}
+
 			return c.body.substring(idx);
 		})
 		.filter((text) => !!text)
@@ -44,6 +45,7 @@ export async function parsePrComments(prNumber: number): Promise<Action[]> {
 			if (typeof line !== "string") {
 				throw new Error(`Non-string data: ${line}`);
 			}
+
 			line = line.trim();
 
 			console.log(`Comment line: '${line}'`);

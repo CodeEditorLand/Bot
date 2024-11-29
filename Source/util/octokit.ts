@@ -16,6 +16,7 @@ export function getCurrentPrNumber(): number {
 			`Cannot get current pr number because GITHUB_REF is not set`,
 		);
 	}
+
 	console.log(`GITHUB_REF: ${ref}`);
 
 	if (ref.startsWith(`refs/pull/`) && ref.endsWith("/merge")) {
