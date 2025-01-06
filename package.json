@@ -3,9 +3,9 @@
 	"main": "index.js",
 	"dependencies": {
 		"@octokit/rest": "21.0.2",
-		"yaml": "2.6.1"
+		"yaml": "2.7.0"
 	},
 	"devDependencies": {
-		"@types/node": "22.10.1"
+		"@types/node": "22.10.5"
 	}
 }
