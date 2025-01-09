@@ -2,7 +2,7 @@
 	"name": "@codeeditorland/bot",
 	"main": "index.js",
 	"dependencies": {
-		"@octokit/rest": "21.0.2",
+		"@octokit/rest": "21.1.0",
 		"yaml": "2.7.0"
 	},
 	"devDependencies": {
