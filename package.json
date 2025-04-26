@@ -32,7 +32,7 @@
 	},
 	"devDependencies": {
 		"@playform/build": "0.2.3",
-		"@types/node": "22.14.1"
+		"@types/node": "22.15.2"
 	},
 	"publishConfig": {
 		"access": "public"
