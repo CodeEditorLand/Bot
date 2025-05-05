@@ -1,0 +1,115 @@
+name: 'Rebase & Bump'
+on:
+  - repository_dispatch
+  - workflow_dispatch
+
+env:
+  GIT_COMMITTER_NAME: "SWC Bot"
+  GIT_COMMITTER_EMAIL: "bot@swc.rs"
+  # https://github.com/actions/setup-node/issues/899#issuecomment-1819151595
+  SKIP_YARN_COREPACK_CHECK: 1
+
+jobs:
+  auto-rebase:
+    name: Auto rebase
+    runs-on: ubuntu-latest
+    concurrency: auto-rebase
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: |
+          yarn
+
+      - name: Rebase a PR
+        run: |
+          npx ts-node src/auto-rebase.ts
+        env:
+          GITHUB_TOKEN: ${{ secrets.BOT_GH_TOKEN }}
+
+  bump-crates:
+    name: Create cargo bump commit
+    runs-on: ubuntu-latest
+    concurrency: cargo-bump
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+          cache: "yarn"
+
+      - name: Install node dependencies
+        run: |
+          yarn
+
+      - uses: actions/checkout@v4
+        with:
+          repository: "swc-project/swc"
+          ref: "main"
+          fetch-depth: 0
+          path: './swc'
+
+      - name: Install latest nightly
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+
+      - name: Install cargo-mono
+        uses: baptiste0928/cargo-install@v2.2.0
+        with:
+          crate: cargo-mono
+          version: "0.3.8"
+          locked: true
+
+      - name: Install git-cliff
+        uses: baptiste0928/cargo-install@v2.2.0
+        with:
+          crate: git-cliff
+          version: "1.3.1"
+          locked: true
+
+      - name: Bump crates
+        id: bump
+        continue-on-error: true
+        working-directory: ./swc
+        run: |
+          npx ts-node ../src/cargo/bump.ts
+        env:
+          GITHUB_TOKEN: ${{ secrets.BOT_GH_TOKEN }}
+
+      - name: Update changelog
+        working-directory: ./swc
+        if: steps.bump.outcome == 'success' && steps.bump.conclusion == 'success'
+        run: |
+          yarn changelog
+
+      - name: Update lockfile
+        working-directory: ./swc
+        if: steps.bump.outcome == 'success' && steps.bump.conclusion == 'success'
+        run: |
+          cargo metadata --format-version 1 > /dev/null
+
+      - name: Create commit
+        working-directory: ./swc
+        if: steps.bump.outcome == 'success' && steps.bump.conclusion == 'success'
+        run: |
+          git add -A
+          git commit --no-verify --author="SWC Bot <bot@swc.rs>" -m 'chore: Bump crates'
+
+      - uses: webfactory/ssh-agent@v0.5.4
+        if: steps.bump.outcome == 'success' && steps.bump.conclusion == 'success'
+        with:
+          ssh-private-key: ${{ secrets.SWC_BOT_SSH }}
+
+      # Push back, using ssh
+      - name: Push back
+        working-directory: ./swc
+        if: steps.bump.outcome == 'success' && steps.bump.conclusion == 'success'
+        run: |
+          git push git@github.com:swc-project/swc.git --no-verify

@@ -1,40 +1,16 @@
 {
-	"name": "@codeeditorland/bot",
-	"version": "0.0.1",
-	"private": false,
-	"keywords": [
-		"codeeditorland",
-		"land",
-		"playform"
-	],
-	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/Bot#readme",
-	"bugs": {
-		"url": "HTTPS://GitHub.Com/CodeEditorLand/Bot/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+HTTPS://github.com/CodeEditorLand/Bot.git"
-	},
-	"license": "SEE LICENSE IN LICENSE",
-	"author": {
-		"name": "Source 🖋️ Open 👐🏻",
-		"email": "Source/Open@Editor.Land",
-		"url": "HTTPS://Editor.Land"
-	},
-	"type": "module",
-	"main": "index.js",
-	"scripts": {
-		"prepublishOnly": "Build 'Source/**/*.ts'"
-	},
-	"dependencies": {
-		"@octokit/rest": "21.1.1",
-		"yaml": "2.7.1"
-	},
-	"devDependencies": {
-		"@playform/build": "0.2.3",
-		"@types/node": "22.15.3"
-	},
-	"publishConfig": {
-		"access": "public"
-	}
+    "name": "swc-bot",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "private": true,
+    "devDependencies": {
+        "@types/node": "^17.0.17",
+        "ts-node": "^10.5.0",
+        "typescript": "^4.5.5"
+    },
+    "dependencies": {
+        "@octokit/rest": "^20.0.0",
+        "yaml": "^1.10.2"
+    }
 }
